@@ -1,18 +1,18 @@
 var coggno = angular.module('coggno', ['coggnoService'])
 
 angular.module('coggnoService', ['ngResource']).
-  factory('CoggnoDocuments', function($resource) {
+  factory('CoggnoDocuments', ['$resource', function($resource) {
     return $resource('/documents.json', {}, {
       index: { method: 'GET', isArray: true},
       create: { method: 'POST' }
     });
-  }).
-  factory('CoggnoDocument', function($resource) {
+  }]).
+  factory('CoggnoDocument', ['$resource', function($resource) {
     return $resource('/documents/:task_id.json', {}, {
       show: { method: 'GET' },
       update: { method: 'PUT' }
     });
-  }); 
+  }]); 
 
 function CoggnoDocumentDetailCtrl($scope, $http, $location){
   $scope.single_document = "";
