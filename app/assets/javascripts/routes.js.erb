@@ -1,0 +1,11 @@
+coggno.config(function($routeProvider){
+  $routeProvider.
+    when('/', {controller:CoggnoDocumentCtrl, templateUrl:'<%= asset_path('documents/index.html')%>'}).
+    when('/new', {controller:CoggnoDocumentCtrl, templateUrl:'<%= asset_path('documents/new.html')%>'}).
+    when('/show/:id', {controller:CoggnoDocumentCtrl, templateUrl:'<%= asset_path('documents/show.html')%>'}).
+    when('/documents/:id', {controller:CoggnoDocumentDetailCtrl, templateUrl:'<%= asset_path('documents/show.html')%>'}).
+    
+    otherwise({redirectTo:'/'}
+
+  );
+});
