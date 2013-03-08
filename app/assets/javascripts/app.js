@@ -39,6 +39,8 @@ function CoggnoDocumentDetailCtrl($scope, $http, $location){
   });
 }
 
+CoggnoDocumentDetailCtrl.$inject = ['$scope', '$http', '$location'];
+
 function CoggnoDocumentCtrl($scope, $http, $location, CoggnoDocuments, $routeParams){  
   $http.get('/documents.json').success(function(data){
     $scope.documents = data;
@@ -49,3 +51,5 @@ function CoggnoDocumentCtrl($scope, $http, $location, CoggnoDocuments, $routePar
     });
   }
 }
+
+CoggnoDocumentCtrl.$inject = ['$scope', '$http', '$location', '$routeParams'];
