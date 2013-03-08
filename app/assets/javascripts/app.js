@@ -28,28 +28,41 @@ function CoggnoDocumentDetailCtrl($scope, $http, $location){
     // Galleria.run('#galleria');
 
      Galleria.run('#galleria', {
-      show: $scope.single_document.current_page,
+        show: $scope.single_document.current_page
     });
 
     Galleria.on('image', function(e){
       if(e.index == 0)
         return;
+      console.log('slide changed');
       $scope.slideChanged(e);
     });
   });
+
 }
 
-CoggnoDocumentDetailCtrl.$inject = ['$scope', '$http', '$location'];
-
-function CoggnoDocumentCtrl($scope, $http, $location, CoggnoDocuments, $routeParams){  
+function CoggnoDocumentCtrl($scope, $http, $location, CoggnoDocuments, $routeParams){
+  
   $http.get('/documents.json').success(function(data){
     $scope.documents = data;
   });
 
+  // $scope.create = function(doc){
+
+  //   d = new CoggnoDocuments(doc);  
+
+  //     $scope.todos.push({text:, done:false});
+
+  //   $scope.documents.push(d);
+  //   // $scope.documents.push(d);
+  //   // d.$create(function(doc){
+  //   //   $location.path('show/' + doc.id);  
+  //   // });
+  // }
+
   $scope.slideChanged = function(slide){
     $http.post('documents/'+$routeParams.id+'/slide_changed?slide_index=' + slide.index).success(function(data){
+
     });
   }
 }
-
-CoggnoDocumentCtrl.$inject = ['$scope', '$http', '$location', '$routeParams'];
