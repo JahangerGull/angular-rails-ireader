@@ -54,7 +54,7 @@ module AngularIreader
     config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
-    config.assets.enabled = false
+    config.assets.enabled = true
 
     config.assets.paths << Rails.root.join("app", "assets", "templates")
 
