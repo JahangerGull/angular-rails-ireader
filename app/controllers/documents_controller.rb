@@ -17,7 +17,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: {id: @document.id, images: JSON.parse(@document.images_links)} }
+      format.json { render json: {id: @document.id, current_page: @document.current_page, images: JSON.parse(@document.images_links)} }
     end
   end
 
@@ -82,6 +82,8 @@ class DocumentsController < ApplicationController
   end
 
   def slide_changed
+    d = Document.find_by_id params[:id]
+    Document.update_all({current_page: params[:slide_index]}, {id: params[:id]})
     render text: "ok" and return false
   end
 end

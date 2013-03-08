@@ -25,39 +25,27 @@ function CoggnoDocumentDetailCtrl($scope, $http, $location){
     $scope.single_document_images = data.images;
     
     Galleria.loadTheme('/assets/galleria.classic.min.js');
-    Galleria.run('#galleria');
+    // Galleria.run('#galleria');
+
+     Galleria.run('#galleria', {
+      show: $scope.single_document.current_page,
+    });
 
     Galleria.on('image', function(e){
-      console.log('slide changed');
-      console.log($location.hash());
+      if(e.index == 0)
+        return;
       $scope.slideChanged(e);
     });
   });
-
 }
 
-function CoggnoDocumentCtrl($scope, $http, $location, CoggnoDocuments){
-  
+function CoggnoDocumentCtrl($scope, $http, $location, CoggnoDocuments, $routeParams){  
   $http.get('/documents.json').success(function(data){
     $scope.documents = data;
   });
 
-  // $scope.create = function(doc){
-
-  //   d = new CoggnoDocuments(doc);  
-
-  //     $scope.todos.push({text:, done:false});
-
-  //   $scope.documents.push(d);
-  //   // $scope.documents.push(d);
-  //   // d.$create(function(doc){
-  //   //   $location.path('show/' + doc.id);  
-  //   // });
-  // }
-
   $scope.slideChanged = function(slide){
-    $http.post('documents/1/slide_changed?slide_index=' + slide.index).success(function(data){
-
+    $http.post('documents/'+$routeParams.id+'/slide_changed?slide_index=' + slide.index).success(function(data){
     });
   }
 }
