@@ -27,14 +27,23 @@ function CoggnoDocumentDetailCtrl($scope, $http, $location){
     Galleria.loadTheme('/assets/galleria.classic.min.js');
     // Galleria.run('#galleria');
 
+    Galleria.ready(function() {
+      var gallery = this; // galleria is ready and the gallery is assigned
+      $('#full_screen').click(function() {
+        gallery.toggleFullscreen(); // toggles the fullscreen
+      });
+    });
+
      Galleria.run('#galleria', {
         show: $scope.single_document.current_page
+        // $('#full_screen').click(function(){
+        //   gallery.toggleFullscreen(); // toggles the fullscreen        
+        // });
     });
 
     Galleria.on('image', function(e){
       if(e.index == 0)
         return;
-      console.log('slide changed');
       $scope.slideChanged(e);
     });
   });
