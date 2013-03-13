@@ -14,9 +14,15 @@ angular.module('coggnoService', ['ngResource']).
     });
   }]); 
 
-function CoggnoDocumentDetailCtrl($scope, $http, $location){
+function CoggnoDocumentDetailCtrl($scope, $http, $location, $routeParams){
   $scope.single_document = "";
   $scope.single_document_images = [];
+
+  setInterval(function(){
+    $http.post('documents/'+$routeParams.id + '/auto_reporting').success(function(data){
+    });
+    console.log("Logging to server after 30 seconds for document !!!" + $routeParams.id);
+  }, 30000);  
 
   $http.get($location.url()).success(function(data){
     Galleria.unloadTheme('/assets/galleria.classic.min.js');
@@ -55,19 +61,6 @@ function CoggnoDocumentCtrl($scope, $http, $location, CoggnoDocuments, $routePar
   $http.get('/documents.json').success(function(data){
     $scope.documents = data;
   });
-
-  // $scope.create = function(doc){
-
-  //   d = new CoggnoDocuments(doc);  
-
-  //     $scope.todos.push({text:, done:false});
-
-  //   $scope.documents.push(d);
-  //   // $scope.documents.push(d);
-  //   // d.$create(function(doc){
-  //   //   $location.path('show/' + doc.id);  
-  //   // });
-  // }
 
   $scope.slideChanged = function(slide){
     $http.post('documents/'+$routeParams.id+'/slide_changed?slide_index=' + slide.index).success(function(data){

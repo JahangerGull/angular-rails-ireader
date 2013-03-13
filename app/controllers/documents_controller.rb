@@ -86,4 +86,9 @@ class DocumentsController < ApplicationController
     Document.update_all({current_page: params[:slide_index]}, {id: params[:id]})
     render text: "ok" and return false
   end
+
+  def auto_reporting
+    
+   render text: "ok" and return false 
+  end
 end
